@@ -47,6 +47,7 @@
 <script>
     linearDiagram(("education_rate"), Array(5).fill(0).map(() => Math.random() * 50));
     linearDiagram(("knowledge_rate"), Array(5).fill(0).map(() => Math.random() * 100));
+    radialDiagram();
 </script>
 
 <div id="drop_zone">Drop files here</div>
@@ -60,7 +61,33 @@
         const reader = new FileReader();
         reader.onload = e => {
             const json = JSON.parse(e.target.result);
-            console.log(json)
+            const educationValues = [];
+            Object.entries(json.задоволення_відповіді).forEach(([key, val]) => {
+              educationValues[parseInt(key)] = val
+            })
+            linearDiagram(("education_rate"), educationValues);
+            
+            const knowledgeValues = [];
+            Object.entries(json.самооцінка_відповіді).forEach(([key, val]) => {
+              knowledgeValues[parseInt(key) - 1] = val
+            })
+            linearDiagram(("knowledge_rate"), knowledgeValues);
+            
+            const radialData = [
+              json.доступність_матеріалів + 1,
+              json.перелік_питань + 1,
+              json.відповідність_завдань + 1,
+              json.РСО + 1,
+              json.перенесення + 1,
+              json.організація_часу + 1,
+              json.змістовна_якість + 1,
+              json.вимогливість + 1,
+              json.коректність + 1,
+              json.інформування + 1,
+              json.задоволення + 1
+            ];
+
+            radialDiagram(radialData);
         };
         for (let i = 0, f; f = files[i]; i++) {
             reader.readAsText(f);
