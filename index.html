@@ -10,9 +10,9 @@
 <body>
     <div class="form">
         <div class="left_info">
-            <div class="prepod_face_and_name">
-                <img class="prepod_face" src="data/sticker_y7y1iyba.png" alt="Prepod's face">
-                <h1 class="prepod_name">зав. каф. Селіванов В. Л.</h1>
+            <div class="prepod_face_and_name" id="prepod">
+                <img class="prepod_face" src="data/sticker_y7y1iyba.png" alt="Prepod's face" id="prepod-face">
+                <h1 class="prepod_name" id='prepod-name'>зав. каф. Селіванов В. Л.</h1>
             </div>
             <div class="general_numbers">
                 <p class="characteristic_num contract_percent" id="contract-percent">25%</p>
@@ -45,6 +45,7 @@
 <script src="src/radial.js"></script>
 <script src="src/linear.js"></script>
 <script src="src/numbers.js"></script>
+<script src="src/prepod.js"></script>
 <script>
     linearDiagram(("education_rate"), Array(5).fill(0).map(() => Math.random() * 50));
     linearDiagram(("knowledge_rate"), Array(5).fill(0).map(() => Math.random() * 100));
@@ -54,6 +55,7 @@
                   Math.round(Math.random() * 100), 
                   Math.round(Math.random() * 100)
                   );
+    updatePrepod('зав. каф. Селіванов В. Л.', 'data/sticker_y7y1iyba.png'); 
 </script>
 
 <div id="drop_zone">Drop files here</div>
@@ -100,6 +102,8 @@
                           json.опитаних, 
                           100
                           );
+
+            updatePrepod(json.name, 'https://lh3.googleusercontent.com/proxy/zM_Qr1wPfJuv4HEUL7DR0WJIiiTHdMOJehHzzoBCZqqEBnrwD1jHeP5y4TZ6Od8Ysqj0B9z2JwI83-tW0omu0SnSDGLcaHIXXPo')
         };
         for (let i = 0, f; f = files[i]; i++) {
             reader.readAsText(f);

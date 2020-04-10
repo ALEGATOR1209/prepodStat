@@ -20,9 +20,16 @@ body {
     overflow: hidden;
 }
 
+.prepod_name_and_face {
+  display: flex;
+  flex-direction: column;
+  
+}
+
 .prepod_face {
+    /* margin: 0 auto;  */
     height: 200px;
-    width: 100%;
+    width: auto;
     border: 5px solid black;
 }
 
