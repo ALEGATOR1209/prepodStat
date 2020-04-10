@@ -1,8 +1,6 @@
 const mapDiagrams = new Map();
 
 function linearDiagram(id, values) {
-
-  //const linearCanvas = document.getElementById(id).getContext('2d');
   
   const data = {
     labels: [ '5', '4', '3', '2', '1' ].reverse(),

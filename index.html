@@ -15,13 +15,13 @@
                 <h1 class="prepod_name">зав. каф. Селіванов В. Л.</h1>
             </div>
             <div class="general_numbers">
-                <p class="characteristic_num contract_percent">25%</p>
+                <p class="characteristic_num contract_percent" id="contract-percent">25%</p>
                 <p class="characteristic_desc">опитаних вважають, що КПІ варто продовжити контракт з цим викладачем</p>
-                <p class="characteristic_num listening_num">75%</p>
+                <p class="characteristic_num listening_num" id="listening-percent">75%</p>
                 <p class="characteristic_desc">гарно чують викладача</p>
-                <p class="characteristic_num respondents_num">50</p>
+                <p class="characteristic_num respondents_num" id="respondents-num">50</p>
                 <p class="characteristic_desc">кількість опитаних</p>
-                <p class="characteristic_num respondents_num">100</p>
+                <p class="characteristic_num respondents_num" id="total-num">100</p>
                 <p class="characteristic_desc">загалом студентів</p>
             </div>
         </div>
@@ -44,10 +44,16 @@
 </body>
 <script src="src/radial.js"></script>
 <script src="src/linear.js"></script>
+<script src="src/numbers.js"></script>
 <script>
     linearDiagram(("education_rate"), Array(5).fill(0).map(() => Math.random() * 50));
     linearDiagram(("knowledge_rate"), Array(5).fill(0).map(() => Math.random() * 100));
     radialDiagram();
+    updateNumbers(Math.round(Math.random() * 100), 
+                  Math.round(Math.random() * 100), 
+                  Math.round(Math.random() * 100), 
+                  Math.round(Math.random() * 100)
+                  );
 </script>
 
 <div id="drop_zone">Drop files here</div>
@@ -88,6 +94,12 @@
             ];
 
             radialDiagram(radialData);
+
+            updateNumbers(Math.round(json.подовження_контракту * 10) / 10, 
+                          Math.round(json.викладача_чути * 10) / 10, 
+                          json.опитаних, 
+                          100
+                          );
         };
         for (let i = 0, f; f = files[i]; i++) {
             reader.readAsText(f);
