@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <script src="./node_modules/chart.js/dist/Chart.min.js"></script>
+<!-- <script src="./js/bundle.js"></script> -->
 <link rel="stylesheet" href="src/styles.css">
 <script>
     const colorGraph = 'rgba(172,172,172,0.7)';
@@ -11,7 +12,7 @@
     <div class="form">
         <div class="left_info">
             <div class="prepod_face_and_name" id="prepod">
-                <img class="prepod_face" src="data/sticker_y7y1iyba.png" alt="Prepod's face" id="prepod-face">
+                <img class="prepod_face" src="https://i.ylilauta.org/d5/cf733e78.jpg" alt="Prepod's face" id="prepod-face">
                 <h1 class="prepod_name" id='prepod-name'>зав. каф. Селіванов В. Л.</h1>
             </div>
             <div class="general_numbers">
@@ -31,11 +32,15 @@
             </div>
             <div class="graphs">
                 <div class="graph_education">
-                    <canvas class="graph" id="education_rate"></canvas>
+                    <div class="helper_div">
+                        <canvas class="graph" id="education_rate"></canvas>
+                    </div>
                     <p class="education_level">Загальний рівень викладання дисципліни</p>
                 </div>
                 <div class="graph_education">
-                    <canvas class="graph" id="knowledge_rate"></canvas>
+                    <div class="helper_div">
+                        <canvas class="graph" id="knowledge_rate"></canvas>
+                    </div>
                     <p class="education_level">Оцінка власних знань після проходження курсу</p>
                 </div>
             </div>
@@ -46,6 +51,8 @@
 <script src="src/linear.js"></script>
 <script src="src/numbers.js"></script>
 <script src="src/prepod.js"></script>
+<script src="src/ajax.js"></script>
+
 <script>
     linearDiagram(("education_rate"), Array(5).fill(0).map(() => Math.random() * 50));
     linearDiagram(("knowledge_rate"), Array(5).fill(0).map(() => Math.random() * 100));
@@ -55,10 +62,17 @@
                   Math.round(Math.random() * 100), 
                   Math.round(Math.random() * 100)
                   );
-    updatePrepod('зав. каф. Селіванов В. Л.', 'data/sticker_y7y1iyba.png'); 
+    updatePrepod('зав. каф. Селіванов В. Л.', 'https://i.ylilauta.org/d5/cf733e78.jpg'); 
 </script>
 
-<div id="drop_zone">Drop files here</div>
+<div class="manage_zone">
+    <div id="drop_zone">Drop files here</div>
+    <form class="manage_zone" action="/submit" method="GET">
+      <textarea name="URL" id="table-URL"></textarea>
+      <input type="button" id="draw-button" value="Draw!" onclick="ajax()"/>
+    </form>
+</div>
+
 <output id="list"></output>
 <script>
     function handleFileSelect(evt) {

@@ -12,6 +12,8 @@ function linearDiagram(id, values) {
   };
 
   const linearChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       yAxes: [{
         barPercentage: 1,

@@ -1,7 +1,6 @@
 let instance = null;
 //const radialCanvas = document.getElementById('radial_diagram').getContext('2d');
 
-
 const labels = [
   'Доступність матеріалів',
   'Перелік питань',
@@ -33,6 +32,8 @@ const datasets = [
 const marksData = { labels, datasets };
 
 let chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
   scale: {
     angleLines: {
       display: true,
@@ -54,14 +55,13 @@ let chartOptions = {
     },
     pointLabels: {
       fontSize: 13,
-      fontColor: colorText
+      fontColor: colorText,
+      padding: 10
     }
   },
   legend: {
     display: false,
   },
-  responsive: true,
-  maintainAspectRatio: false,
 };
 
 // new Chart(radialCanvas, {

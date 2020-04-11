@@ -15,8 +15,8 @@ body {
     grid-column-gap: 20px;
     padding: 25px 25px 25px 25px;
     margin: 0;
-    width: 800px;
-    height: 800px;
+    width: 840px;
+    height: 840px;
     overflow: hidden;
 }
 
@@ -131,4 +131,31 @@ body {
     border: 5px dashed gray;
     padding: 30px;
     border-radius: 25px;
+}
+
+.manage_zone {
+    display: flex;
+    flex-direction: column;
+}
+
+#table-URL {
+  font-size: 20px;
+  width: 600px;
+  height: 80px;
+  margin-top: 25px;
+  margin-left: 25px;
+}
+
+#draw-button {
+  font-size: 20px;
+  width: 600px;
+  height: 30px;
+  margin-top: 5px;
+  margin-left: 25px;
+}
+
+.helper_div {
+  position: relative;
+  height: 222px;
+  width: 286px;
 }
