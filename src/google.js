@@ -7,13 +7,12 @@ const Correlation = require('node-correlation');
 const FormulaParser = require('hot-formula-parser').Parser;
 let parser = new FormulaParser();
 
-const onClickListener = () => {
-  console.log('Clicked!');
-};
-
 const avg = (acc, val, ind, arr) => (acc + val / arr.length);
 
-const dispersion = arr => {
+const dispersion = obj => {
+  const entries = Object.entries(obj);
+  let arr = [];
+  entries.forEach(([key, value]) => arr = arr.concat(new Array(value).fill(key)));
   const average = arr.reduce(avg, 0);
   const disp = (acc, val, ind, arr) => (acc + Math.pow((average - val), 2) / arr.length);
   return arr.reduce(disp, 0);
@@ -35,7 +34,7 @@ const TOKEN_PATH = 'token.json';
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(credentials, callback, id, response) {
+function authorize(credentials, callback, idPrepod, idPrepodsData, response) {
   const {client_secret, client_id, redirect_uris} = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 
@@ -43,7 +42,7 @@ function authorize(credentials, callback, id, response) {
   fs.readFile(TOKEN_PATH, (err, token) => {
     if (err) return getNewToken(oAuth2Client, callback);
     oAuth2Client.setCredentials(JSON.parse(token));
-    callback(oAuth2Client, id, response);
+    callback(oAuth2Client, idPrepod, idPrepodsData, response);
   });
 }
 
@@ -74,9 +73,11 @@ function getNewToken(oAuth2Client, callback) {
 
 
 
-function listMajors(auth, id, response) {
+function listMajors(auth, idPrepod, idPrepodsData, response) {
   const result = {
     name: '',
+    picURL: '',
+    totalStudents: 0,
     опитаних: 0,
     курс: {
       1: 0,
@@ -121,16 +122,58 @@ function listMajors(auth, id, response) {
   };
   
   const sheets = google.sheets({version: 'v4', auth});
-  const total = 50;
-  result.name = 'проф. Стеценко І. В.';
+  let counter = 0;
+
+  sheets.spreadsheets.get({
+    spreadsheetId: idPrepod
+  }, (err, res) => {
+    if (err) return console.log('The API returned an error: ' + err);
+    const regExp = /.+(?= \(Ответы)/;
+    result.name = res.data.properties.title.match(regExp)[0];
+    console.log(result.name);
+
+    sheets.spreadsheets.values.get({
+      spreadsheetId: idPrepodsData,
+      range: 'Лист1!A1:D'
+    }, (err, res) => {
+      if (err) return console.log('The API returned an error: ' + err);
+      const rows = res.data.values;
+      if (rows.length) {
+        rows.forEach(row => {
+          //console.log(row[0]);
+          if (row[0] === result.name) {
+            result.picURL = row[2];
+            const regExp = /(?<=\/)[0-9]+/;
+            result.totalStudents = parseInt(row[3].match(regExp));
+          }
+        });
+      }
+      const total = result.totalStudents;
+      const responses = result.опитаних;
+      const disp = dispersion(result.задоволення_відповіді);
+      console.log(responses, total, disp);
+      const stError = parser.parse(`T.INV(0.975, ${responses - 1})`).result;
+      const confidenceInt = stError * Math.sqrt(disp) / Math.sqrt(responses) * Math.sqrt(1 - responses / total);
+
+      result.confidenceInt = confidenceInt;
+
+      counter++;
+      if (counter == 2) {
+        const json = JSON.stringify(result);
+        response.write(json);
+        response.end();
+      }
+    });
+  });
+
   sheets.spreadsheets.values.get({
-    spreadsheetId: id,
+    spreadsheetId: idPrepod,
     range: 'Ответы на форму (1)!C2:T',
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
     const rows = res.data.values;
     if (rows.length) {
-      rows.map((row) => {
+      rows.forEach(row => {
         if (row[0]) {
           result.опитаних++;
           result.курс[+row[0]]++;
@@ -158,12 +201,7 @@ function listMajors(auth, id, response) {
           result.подовження_контракту.push(row[17] === 'Так' ? 100 : 0);
         }
       });
-      const responses = result.задоволення.length;
-      const disp = dispersion(result.задоволення);
-      const stError = parser.parse(`T.INV(0.975, ${responses - 1})`).result;
-      const confidenceInt = stError * Math.sqrt(disp) / Math.sqrt(responses) * Math.sqrt(1 - responses / total);
 
-      result.confidenceInt = confidenceInt;
       result.CORR_оцінка_самооцінка = Correlation.calc(result.оцінка_заліковка, result.самооцінка);
       result.доступність_матеріалів = result.доступність_матеріалів.reduce(avg, 0);
       result.перелік_питань = result.перелік_питань.reduce(avg, 0);
@@ -181,11 +219,13 @@ function listMajors(auth, id, response) {
       result.самооцінка = result.самооцінка.reduce(avg, 0);
       result.оцінка_заліковка = result.оцінка_заліковка.reduce(avg, 0);
       result.подовження_контракту = result.подовження_контракту.reduce(avg, 0);
-      console.log([confidenceInt, responses, result.CORR_оцінка_самооцінка]);
-      const json = JSON.stringify(result);
-      //fs.writeFileSync('./data/' + result.name + '.json', json);
-      response.write(json);
-      response.end();
+      // console.log([confidenceInt, responses, result.CORR_оцінка_самооцінка]);
+      counter++;
+      if (counter == 2) {
+        const json = JSON.stringify(result);
+        response.write(json);
+        response.end();
+      }
     } else {
       console.log('No data found.');
     }
@@ -193,12 +233,12 @@ function listMajors(auth, id, response) {
 } 
 
 const getJSON = (url, response) => {
-  const regExp = /(?<=https:\/\/docs\.google\.com\/spreadsheets\/d\/)[^/]+/;
-  const id = url.match(regExp);
+  const regExp = /[^/]+/g;
+  const [idPrepod, idPrepodsData] = url.match(regExp);
   fs.readFile('credentials.json', (err, content) => {
     if (err) return console.log('Error loading client secret file:', err);
     // Authorize a client with credentials, then call the Google Sheets API.
-    authorize(JSON.parse(content), listMajors, id, response);
+    authorize(JSON.parse(content), listMajors, idPrepod, idPrepodsData, response);
   });
 };
 

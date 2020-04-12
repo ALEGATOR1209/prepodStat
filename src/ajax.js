@@ -50,10 +50,11 @@ function ajax() {
         updateNumbers(Math.round(json.подовження_контракту * 10) / 10, 
           Math.round(json.викладача_чути * 10) / 10, 
           json.опитаних, 
-          100
+          json.totalStudents,
+          json.confidenceInt
         );
 
-        updatePrepod(json.name, 'https://lh3.googleusercontent.com/proxy/zM_Qr1wPfJuv4HEUL7DR0WJIiiTHdMOJehHzzoBCZqqEBnrwD1jHeP5y4TZ6Od8Ysqj0B9z2JwI83-tW0omu0SnSDGLcaHIXXPo');
+        updatePrepod(json.name, json.picURL);
 
         // alert('Ответ сервера: '+req.responseText);
       }
@@ -61,9 +62,12 @@ function ajax() {
     }
 
   };
-  const URL = document.getElementById('table-URL').value;
+  const URL = document.getElementById('table-URL').value + document.getElementById('table-prepods-URL').value;
   // (3) задать адрес подключения
-  req.open('GET', '/ajax/' + URL, true);  
+  const regExp = /(?<=https:\/\/docs\.google\.com\/spreadsheets\/d\/)[^/]+/g;
+  const [idPrepod, idPrepodsData] = URL.match(regExp);
+
+  req.open('GET', '/ajax/' + idPrepod + '/' + idPrepodsData, true);
 
   // объект запроса подготовлен: указан адрес и создана функция onreadystatechange
   // для обработки ответа сервера

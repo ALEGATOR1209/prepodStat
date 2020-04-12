@@ -68,9 +68,12 @@
 <div class="manage_zone">
     <div id="drop_zone">Drop files here</div>
     <form class="manage_zone" action="/submit" method="GET">
-      <textarea name="URL" id="table-URL"></textarea>
+      <textarea name="URL table" id="table-URL" placeholder="Prepod table URL"></textarea>
+      <textarea name="URL prepods table" id="table-prepods-URL" placeholder="Prepods table URL (with pictures)"></textarea>
       <input type="button" id="draw-button" value="Draw!" onclick="ajax()"/>
+      <h1 id="confidence-interval">Confidence interval: </h1>
     </form>
+    
 </div>
 
 <output id="list"></output>
@@ -117,7 +120,7 @@
                           100
                           );
 
-            updatePrepod(json.name, 'https://lh3.googleusercontent.com/proxy/zM_Qr1wPfJuv4HEUL7DR0WJIiiTHdMOJehHzzoBCZqqEBnrwD1jHeP5y4TZ6Od8Ysqj0B9z2JwI83-tW0omu0SnSDGLcaHIXXPo')
+            updatePrepod(json.name, 'https://lh3.googleusercontent.com/proxy/JFvdenv0zHFWigafsML_mQr6Cuk4zCPXKX-c70gB1VH_hoKCaZK3g2aiUvdTJ_uATClQ738ZJvq1yKFvhUk3ocT5IAUImjLRKy8')
         };
         for (let i = 0, f; f = files[i]; i++) {
             reader.readAsText(f);

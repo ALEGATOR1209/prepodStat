@@ -18,9 +18,9 @@ const port = 3000;
 const requestHandler = (request, response) => {
   console.log(request.url);
   if (request.url.slice(0, 5) == '/ajax') {
-    const URL = request.url.slice(6);
-    console.log(URL);
-    getJSON(URL, response);
+    const URLs = request.url.slice(6);
+    //console.log(URLs);
+    getJSON(URLs, response);
   } else {
     switch (request.url) {
     case '/favicon.ico': 

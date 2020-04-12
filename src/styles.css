@@ -11,23 +11,23 @@ body {
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
     display: grid;
-    grid-template-columns: 200px 620px;
-    grid-column-gap: 20px;
-    padding: 25px 25px 25px 25px;
+    grid-template-columns: 220px 620px;
+    /* grid-column-gap: 20px; */
+    padding: 20px 20px 20px 20px;
     margin: 0;
     width: 840px;
     height: 840px;
     overflow: hidden;
 }
 
-.prepod_name_and_face {
+.prepod_face_and_name {
   display: flex;
   flex-direction: column;
   
 }
 
 .prepod_face {
-    /* margin: 0 auto;  */
+    margin: 0 auto; 
     height: 200px;
     width: auto;
     border: 5px solid black;
@@ -83,6 +83,8 @@ body {
 }
 
 .radial {
+    display: flex;
+    margin: 0 auto;
     width: 575px;
     height: 60%;
 }
@@ -99,10 +101,10 @@ body {
     max-width: 600px;
 }
 
-.graph {
+/* .graph {
     min-height: 60%;
     max-width: 100%;
-}
+} */
 
 .education_level {
     font-size: 16px;
@@ -114,7 +116,6 @@ body {
 
 .graphs {
     display: flex;
-    min-height: 50%;
     width: 100%;
 }
 
@@ -146,6 +147,14 @@ body {
   margin-left: 25px;
 }
 
+#table-prepods-URL {
+  font-size: 20px;
+  width: 600px;
+  height: 80px;
+  margin-top: 25px;
+  margin-left: 25px;
+}
+
 #draw-button {
   font-size: 20px;
   width: 600px;
@@ -158,4 +167,11 @@ body {
   position: relative;
   height: 222px;
   width: 286px;
+}
+
+#confidence-interval {
+  margin-top: 25px;
+  margin-left: 25px;
+  background-color: black;
+  color: white;
 }

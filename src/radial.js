@@ -4,9 +4,9 @@ let instance = null;
 const labels = [
   'Доступність матеріалів',
   'Перелік питань',
-  'Відповідність лаб. робіт',
+  ['Відповідність', 'лаб. робіт'],
   'РСО',
-  'Перенесення занять',
+  ['Перенесення', 'занять'],
   'Організація часу',
   'Змістовна якість',
   'Вимогливість',
@@ -54,7 +54,7 @@ let chartOptions = {
       backdropColor: 'transparent'
     },
     pointLabels: {
-      fontSize: 13,
+      fontSize: 16,
       fontColor: colorText,
       padding: 10
     }
