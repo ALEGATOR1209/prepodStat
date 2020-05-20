@@ -1,44 +1,45 @@
 body {
     display: flex;
     background: lightcoral;
+  width: 1500px;
+  height: 1500px;
 }
 
 .form {
-    /*background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("https://m.day.kyiv.ua/sites/default/files/news/01092016/255079.jpg");*/
-    /*background-size: 1300px;*/
-    background-color: #1c1c1c;
-    color: white;
-    font-weight: bold;
-    font-family: 'Roboto', sans-serif;
-    display: grid;
-    grid-template-columns: 220px 620px;
-    /* grid-column-gap: 20px; */
-    padding: 20px 20px 20px 20px;
-    margin: 0;
-    width: 840px;
-    height: 840px;
-    overflow: hidden;
+  box-sizing: border-box;
+  background-color: #181616;
+  color: white;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  padding: 100px;
+  margin: 0;
+  width: 1500px;
+  height: 1500px;
+  overflow: hidden;
+
 }
 
 .prepod_face_and_name {
   display: flex;
   flex-direction: column;
-  
+
 }
 
 .prepod_face {
-    margin: 0 auto; 
-    height: 200px;
-    width: auto;
-    border: 5px solid black;
+    height: auto;
+  width: 100%;
 }
-
+.img_container {
+  width: 390px;
+  height: 390px;
+  overflow: hidden;
+}
 .prepod_name {
-    font-size: 22px;
+    font-size: 30px;
     width: 100%;
-    text-align: center;
-    padding-top: 20px;
-    margin: 0;
+    margin-top: 55px;
 }
 
 .left_info {
@@ -49,27 +50,58 @@ body {
 }
 
 .right_info {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 0 0 0 100px;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
     /*background: brown;*/
 }
 
 .characteristic_desc {
-    font-size: 18px;
-    margin: 0 0 25px;
-    color: gray;
-    width: 100%;
-    font-weight: normal;
+  font-size: 28px;
+  line-height: 35px;
+  color: #cacaca;
+  width: 100%;
+  font-weight: normal;
 }
 
 .characteristic_num {
-    font-size: 36px;
-    font-weight: bold;
-    padding-top: 15px;
-    margin: 0;
+  font-size: 80px;
+  font-weight: bold;
+  padding-top: 45px;
+  padding-bottom: 10px;
+  margin: 0;
 }
 
+.amount_numbers {
+  display: flex;
+  flex-flow: row nowrap;
+  padding-top: 45px;
+  padding-bottom: 10px;
+  justify-content: space-between;
+}
+.amount_numbers div {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.amount_numbers .characteristic_num {
+  font-size: 50px;
+  padding: 0 10px 0 0;
+  margin: 0;
+  line-height: normal;
+}
+.amount_numbers .characteristic_desc{
+  font-size: 25px;
+  color: #cacaca;
+  width: 120px;
+  font-weight: normal;
+  line-height: normal;
+
+}
 .contract_percent {
     color: yellowgreen;
 }
@@ -84,21 +116,20 @@ body {
 
 .radial {
     display: flex;
-    margin: 0 auto;
-    width: 575px;
-    height: 60%;
+    /*margin: 0 auto;*/
+    width: 100%;
+    height: 758px;
 }
 
 .general_numbers {
-    margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: column nowrap;
+  height: 63%;
 }
 
 .graph_education {
-    margin-top: 30px;
-    margin-left: 10px;
-    margin-right: 30px;
-    text-align: center;
-    max-width: 600px;
+  width: 48%;
 }
 
 /* .graph {
@@ -107,7 +138,11 @@ body {
 } */
 
 .education_level {
-    font-size: 16px;
+    font-size: 28px;
+  line-height: 40px;
+  font-weight: normal;
+  padding-left: 60px;
+  text-align: center;
 }
 
 .characteristics_inline {
@@ -115,8 +150,9 @@ body {
 }
 
 .graphs {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 #drop_zone {
@@ -135,8 +171,8 @@ body {
 }
 
 .manage_zone {
-    display: flex;
-    flex-direction: column;
+  width: 50%;
+  height: 50%;
 }
 
 #table-URL {
@@ -165,8 +201,8 @@ body {
 
 .helper_div {
   position: relative;
-  height: 222px;
-  width: 286px;
+  height: 380px;
+  width: 100%;
 }
 
 #confidence-interval {
@@ -174,4 +210,19 @@ body {
   margin-left: 25px;
   background-color: black;
   color: white;
+}
+
+.popup {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }

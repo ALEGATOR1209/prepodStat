@@ -1,7 +1,7 @@
 const mapDiagrams = new Map();
 
 function linearDiagram(id, values) {
-  
+
   const data = {
     labels: [ '5', '4', '3', '2', '1' ].reverse(),
     datasets: [{
@@ -20,8 +20,9 @@ function linearDiagram(id, values) {
         categoryPercentage: 0.6,
         ticks: {
           fontColor: colorText,
-          fontSize: 14,
-          beginAtZero: true
+          fontSize: 25,
+          beginAtZero: true,
+          maxTicksLimit: 6,
         },
         gridLines: {
           display: false
@@ -31,7 +32,7 @@ function linearDiagram(id, values) {
         id: 'y-axis-marks',
         ticks: {
           fontColor: colorText,
-          fontSize: 14,
+          fontSize: 25,
           beginAtZero: true
         },
         gridLines: {

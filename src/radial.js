@@ -49,12 +49,12 @@ let chartOptions = {
       min: 1,
       max: 5,
       stepSize: 1,
-      fontSize: 18,
+      fontSize: 24,
       fontColor: 'white',
       backdropColor: 'transparent'
     },
     pointLabels: {
-      fontSize: 16,
+      fontSize: 24,
       fontColor: colorText,
       padding: 10
     }
