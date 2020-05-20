@@ -8,6 +8,7 @@ const radialJs = fs.readFileSync('./src/radial.js', 'utf-8');
 const prepodJs = fs.readFileSync('./src/prepod.js', 'utf-8');
 const numbersJs = fs.readFileSync('./src/numbers.js', 'utf-8');
 const stylesCss = fs.readFileSync('./src/styles.css', 'utf-8');
+const resetCss = fs.readFileSync('./src/reset.css', 'utf-8');
 const chartJs = fs.readFileSync('./node_modules/chart.js/dist/Chart.min.js', 'utf-8');
 const ajaxJs = fs.readFileSync('./src/ajax.js', 'utf-8');
 
@@ -23,34 +24,37 @@ const requestHandler = (request, response) => {
     getJSON(URLs, response);
   } else {
     switch (request.url) {
-    case '/favicon.ico': 
+    case '/favicon.ico':
       response.write(html);
       break;
-    case '/src/styles.css': 
+    case '/src/reset.css':
+      response.write(resetCss);
+      break;
+    case '/src/styles.css':
       response.write(stylesCss);
       break;
-    case '/node_modules/chart.js/dist/Chart.min.js': 
+    case '/node_modules/chart.js/dist/Chart.min.js':
       response.write(chartJs);
       break;
-    case '/src/radial.js': 
+    case '/src/radial.js':
       response.write(radialJs);
       break;
-    case '/src/linear.js': 
+    case '/src/linear.js':
       response.write(linearJs);
       break;
-    case '/src/numbers.js': 
+    case '/src/numbers.js':
       response.write(numbersJs);
       break;
-    case '/src/prepod.js': 
+    case '/src/prepod.js':
       response.write(prepodJs);
       break;
-    case '/src/ajax.js': 
+    case '/src/ajax.js':
       response.write(ajaxJs);
       break;
     default:
-      response.writeHeader(200, {'Content-Type': 'text/html'});  
+      response.writeHeader(200, {'Content-Type': 'text/html'});
       response.write(html);
-    }    
+    }
     response.end();
   }
 };

@@ -5,7 +5,9 @@
   "main": "index.html",
   "dependencies": {
     "chart.js": "^2.9.3",
-    "googleapis": "^51.0.0"
+    "googleapis": "^51.0.0",
+    "hot-formula-parser": "^3.0.2",
+    "node-correlation": "^1.0.2"
   },
   "devDependencies": {},
   "scripts": {
