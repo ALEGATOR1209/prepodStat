@@ -38,7 +38,7 @@
                     </div>
                     <div>
                         <p class="characteristic_num respondents_num" id="total-num">100</p>
-                        <p class="characteristic_desc">орієнтовна кількість студентів, що навчається у цього викладача</p>
+                        <p class="characteristic_desc">орієнтовна кількість студентів, що навчаються у цього викладача</p>
                     </div>
 
 
@@ -70,11 +70,11 @@
                 <div id="drop_zone">Drop files here</div>
                 <form action="/submit" method="GET">
                     <textarea name="URL table" id="table-URL" placeholder="Prepod table URL"></textarea>
-                    <textarea name="URL prepods table" id="table-prepods-URL" placeholder="Prepods table URL (with pictures)"></textarea>
+                    <textarea name="URL prepods table" id="table-prepods-URL" placeholder="Prepods table URL (with pictures)">https://docs.google.com/spreadsheets/d/1BgMezU3Thg9Om3stZWr3vYdvcED5anRk2bTvvEbyZMw/edit#gid=0</textarea>
                     <input type="button" id="draw-button" value="Draw!" onclick="ajax()"/>
                     <h1 id="confidence-interval">Confidence interval: </h1>
                 </form>
-                <button onclick="togglePopup()">Скрыть</button>
+                <button onclick="togglePopup()" id="popup-button">Скрыть</button>
             </div>
 
             <output id="list"></output>

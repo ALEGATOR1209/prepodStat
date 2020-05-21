@@ -2,17 +2,17 @@ let instance = null;
 //const radialCanvas = document.getElementById('radial_diagram').getContext('2d');
 
 const labels = [
-  'Доступність матеріалів',
-  'Перелік питань',
-  ['Відповідність', 'лаб. робіт'],
-  'РСО',
-  ['Перенесення', 'занять'],
-  'Організація часу',
-  'Змістовна якість',
+  ['Перенесення', 'занять і', 'запізнення'],
+  ['Своєчасність надання', 'питань до заліку'],
+  ['Змістовність ', 'матеріалу'],
+  ['Наявність', 'РСО'],
+  ['Доступність', 'матеріалів'],
   'Вимогливість',
+  ['Відповідність', 'практик лекціям'],
+  ['Організація', 'лекційного часу'],
   'Коректність',
-  'Інформування',
-  'Задоволення якістю',
+  ['Інформування', 'студентів'],
+  ['Задоволення', 'викладанням', 'дисципліни'],
 ];
 
 const teachersFactory = (name, data) => ({
@@ -38,10 +38,12 @@ let chartOptions = {
     angleLines: {
       display: true,
       color: colorLines,
+      lineWidth: 2
     },
     gridLines: {
       display: true,
       color: colorLines,
+      lineWidth: 2
     },
     ticks: {
       display: true,
@@ -51,12 +53,11 @@ let chartOptions = {
       stepSize: 1,
       fontSize: 24,
       fontColor: 'white',
-      backdropColor: 'transparent'
+      backdropColor: 'rgb(24,22,22)',
     },
     pointLabels: {
       fontSize: 24,
-      fontColor: colorText,
-      padding: 10
+      fontColor: colorText
     }
   },
   legend: {

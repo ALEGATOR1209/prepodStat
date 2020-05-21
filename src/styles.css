@@ -176,25 +176,33 @@ body {
 }
 
 #table-URL {
-  font-size: 20px;
+  font-size: 25pt;
   width: 600px;
-  height: 80px;
+  height: 200px;
   margin-top: 25px;
   margin-left: 25px;
 }
 
 #table-prepods-URL {
-  font-size: 20px;
+  font-size: 25pt;
   width: 600px;
-  height: 80px;
+  height: 200px;
   margin-top: 25px;
   margin-left: 25px;
 }
 
 #draw-button {
-  font-size: 20px;
+  font-size: 40pt;
   width: 600px;
-  height: 30px;
+  height: 100px;
+  margin-top: 5px;
+  margin-left: 25px;
+}
+
+#popup-button {
+  font-size: 40pt;
+  width: 600px;
+  height: 100px;
   margin-top: 5px;
   margin-left: 25px;
 }
@@ -210,6 +218,8 @@ body {
   margin-left: 25px;
   background-color: black;
   color: white;
+  font-size: 40pt;
+  width: 600px;
 }
 
 .popup {
